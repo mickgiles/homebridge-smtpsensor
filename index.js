@@ -31,7 +31,7 @@ SmtpSensorPlatform.prototype = {
         callback(sensorAccessories);
 
         var server = new SMTPServer({
-            disabledCommands: ['AUTH']
+            secure:true
             ,
             onData: function(stream, session, callback){
                 debug("Data received...");
@@ -112,7 +112,6 @@ SmtpSensorAccessory.prototype = {
                         .setValue(newState);
             };
         }
-
         this.changeHandler = function(){
             var d = new Date();
             var newState = this.inverse ? false : true;
@@ -129,4 +128,4 @@ SmtpSensorAccessory.prototype = {
 
         return [informationService, service];
     }
-};
+};        
