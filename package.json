@@ -1,10 +1,10 @@
 {
   "name": "homebridge-smtpsensor",
   "description": "SMTP Sensor plugin for homebridge: https://github.com/nfarina/homebridge",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": {
     "type": "git",
-    "url": "git://github.com/SphtKr/homebridge-smtpsensor.git"
+    "url": "git://github.com/mickgiles/homebridge-smtpsensor.git"
   },
   "license": "ISC",
   "preferGlobal": true,
