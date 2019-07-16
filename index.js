@@ -32,7 +32,6 @@ SmtpSensorPlatform.prototype = {
 
         var server = new SMTPServer({
             authOptional: true,
-            ,
             onData: function(stream, session, callback){
                 debug("Data received...");
                 var mailparser = new MailParser();
