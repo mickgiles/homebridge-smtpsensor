@@ -19,6 +19,10 @@ function SmtpSensorPlatform(log, config){
     this.sensors = config["sensors"] || [];
 }
 
+function log(message){
+    console.log(message);
+}
+
 SmtpSensorPlatform.prototype = {
 
     accessories: function(callback) {
@@ -33,18 +37,18 @@ SmtpSensorPlatform.prototype = {
         var server = new SMTPServer({
             allowInsecureAuth: true,
             onData: function(stream, session, callback){
-                debug("Data received...");
+                log("Data received...");
                 var mailparser = new MailParser();
                 mailparser.on("end", function(mail_object){
-                    debug("Subject: ", mail_object.subject);
-                    debug("Text: ", mail_object.text);
+                    log("Subject: ", mail_object.subject);
+                    log("Text: ", mail_object.text);
                     for(var i = 0; i < saCount; i++){
                         if(sensorAccessories[i].pattern.test(mail_object.subject)){
-                            debug("Sensor triggered on subject!");
+                            log("Sensor triggered on subject!");
                             sensorAccessories[i].changeHandler();
                         }
                         if(sensorAccessories[i].pattern.test(mail_object.text)){
-                            debug("Sensor triggered on body text!");
+                            log("Sensor triggered on body text!");
                             sensorAccessories[i].changeHandler();
                         }
                     }
@@ -54,7 +58,7 @@ SmtpSensorPlatform.prototype = {
             }
             ,
             onAuth: function(auth, session, callback){
-                debug("Authentication attempted...");
+                log("Authentication attempted...");
                 callback(null, {user: "anonymous"});
             }
         });
@@ -79,7 +83,7 @@ function SmtpSensorAccessory(log, sensorConfig) {
         var shasum = crypto.createHash('sha1');
         shasum.update(this.keyword);
         this.sn = shasum.digest('base64');
-        debug('Computed SN ' + this.sn);
+        log('Computed SN ' + this.sn);
     }
 }
 
