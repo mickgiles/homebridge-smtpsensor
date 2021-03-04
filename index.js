@@ -36,6 +36,7 @@ SmtpSensorPlatform.prototype = {
 
         var server = new SMTPServer({
             allowInsecureAuth: true,
+            authOptional:true,
             onData: function(stream, session, callback){
                 log("Data received...");
                 var mailparser = new MailParser();
